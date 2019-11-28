@@ -1,0 +1,67 @@
+#anchorPane {
+    -fx-border-width: 1px;
+    -fx-border-color: gray;
+}
+
+#gridPane {
+    -fx-border-width: 1px;
+    -fx-border-color: gray;
+}
+
+#controlBar {
+    -fx-background-color: white;
+}
+
+#dialogTitle {
+    -fx-font-weight: 700;
+    -fx-font-size: 16px;
+}
+
+.control-button:hover {
+    -fx-background-color: lightblue;
+}
+
+.control-button:pressed {
+    -fx-background-color: lightgray;
+}
+
+.control-button {
+    -fx-background-color: none;
+}
+
+#popupLabel {
+    -fx-font-size: 16px;
+    -fx-font-weight: 600;
+}
+
+#popupBox {
+    -fx-border-color: gray;
+    -fx-border-width: 1px;
+    -fx-background-color: lightgray;
+}
+
+#contentBox {
+    -fx-spacing: 10px;
+    -fx-background-color: lightgray;
+}
+
+.menu-item:hover {
+    -fx-background-color: lightblue;
+}
+
+.menu-item:pressed {
+    -fx-background-color: lightgray;
+}
+
+.dot-text {
+    -fx-font-weight: 700;
+}
+
+.bold-text {
+    -fx-font-size: 16px;
+    -fx-font-weight: 700;
+}
+
+#serverIp {
+    -fx-font-size: 14px;
+}

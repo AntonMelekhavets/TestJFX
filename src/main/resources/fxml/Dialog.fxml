@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane fx:id="anchorPane" prefHeight="230.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.171"
+            stylesheets="@../css/style.css"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.test.jfx.Controller.DialogController"
+            onKeyPressed="#onKeyPressed">
+    <children>
+        <fx:include source="Header.fxml"/>
+        <VBox fx:id="vBox" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="35" AnchorPane.rightAnchor="0"
+              AnchorPane.bottomAnchor="0" spacing="10" fillWidth="true">
+            <padding>
+                <Insets top="10" bottom="10" left="10" right="10"/>
+            </padding>
+            <HBox fx:id="ipBox">
+                <TextField fx:id="firstIpNum" alignment="CENTER" prefWidth="50"/>
+                <Label styleClass="dot-text" text="." alignment="BOTTOM_CENTER" prefHeight="25"/>
+                <TextField fx:id="secondIpNum" alignment="CENTER" prefWidth="50"/>
+                <Label styleClass="dot-text" text="." alignment="BOTTOM_CENTER" prefHeight="25"/>
+                <TextField fx:id="thirdIpNum" alignment="CENTER" prefWidth="50"/>
+                <Label styleClass="dot-text" text="." alignment="BOTTOM_CENTER" prefHeight="25"/>
+                <TextField fx:id="fourthIpNum" alignment="CENTER" prefWidth="50"/>
+                <TextFlow>
+                    <children>
+                        <Text styleClass="bold-text" text="Server IP: "/>
+                        <Text fx:id="serverIp"/>
+                    </children>
+                    <HBox.margin>
+                        <Insets left="10"/>
+                    </HBox.margin>
+                </TextFlow>
+            </HBox>
+            <TextArea fx:id="text" minHeight="200" prefHeight="200" prefWidth="350"/>
+            <TextFlow fx:id="textOut">
+                <children>
+                    <Text styleClass="bold-text" text="Server answer: "/>
+                    <Text fx:id="contentText"/>
+                </children>
+            </TextFlow>
+            <Button fx:id="sendButton" onAction="#onSendClick">Send Message</Button>
+            <Button fx:id="switchButton" onAction="#onSwitchClick">Hide</Button>
+        </VBox>
+    </children>
+</AnchorPane>
