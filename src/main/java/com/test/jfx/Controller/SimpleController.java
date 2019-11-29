@@ -29,6 +29,7 @@ import javafx.scene.layout.*;
 import javafx.stage.*;
 import javafx.util.Callback;
 import javafx.util.Duration;
+import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.net.URL;
@@ -173,6 +174,20 @@ public class SimpleController implements Initializable {
     public void onChoiceClick() {
         ChoiceDialog<String> dialog = new ChoiceDialog<>();
         dialog.getItems().addAll(getOptions());
+        ComboBox<String> comboBox = (ComboBox<String>) dialog.getDialogPane().lookup(".combo-box");
+        comboBox.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(String object) {
+                if (object != null)
+                    return object.split("\\W")[0];
+                return object;
+            }
+
+            @Override
+            public String fromString(String string) {
+                return string;
+            }
+        });
         dialog.setHeaderText("Choose captured window.");
         dialog.setTitle("Capturing window?");
         dialog.setContentText("Choose the window to be captured:");

@@ -5,6 +5,7 @@
 <?import com.pixelduke.control.ribbon.RibbonTab?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <BorderPane fx:id="pane" maxHeight="-Infinity" minHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity"
@@ -14,21 +15,45 @@
     <top>
         <VBox fx:id="vBox" fillWidth="true">
             <fx:include source="../Header.fxml"/>
-            <Ribbon>
+            <Ribbon style="RIBBON_BUTTON_SELECTED_COLOR: red">
                 <tabs>
                     <RibbonTab text="Controls">
                         <ribbonGroups>
                             <RibbonGroup title="Capture">
                                 <nodes>
-                                    <Button contentDisplay="TOP" fx:id="choiceButton" onAction="#onChoiceClick"/>
+                                    <Button contentDisplay="TOP" fx:id="choiceButton" onAction="#onChoiceClick">
+                                        <graphic>
+                                            <ImageView>
+                                                <Image url="@../../images/ribbon/select-64.png"/>
+                                            </ImageView>
+                                        </graphic>
+                                    </Button>
                                     <Button contentDisplay="TOP" fx:id="printScreenButton"
-                                            onAction="#onPrintScreenClick"/>
+                                            onAction="#onPrintScreenClick">
+                                        <graphic>
+                                            <ImageView>
+                                                <Image url="@../../images/ribbon/screenshot-64.png"/>
+                                            </ImageView>
+                                        </graphic>
+                                    </Button>
                                 </nodes>
                             </RibbonGroup>
                             <RibbonGroup title="Dialog">
                                 <nodes>
-                                    <Button contentDisplay="TOP" fx:id="popupButton" onAction="#onPopupClick"/>
-                                    <Button contentDisplay="TOP" fx:id="dialogButton" onAction="#onDialogClick"/>
+                                    <Button contentDisplay="TOP" fx:id="popupButton" onAction="#onPopupClick">
+                                        <graphic>
+                                            <ImageView>
+                                                <Image url="@../../images/ribbon/popup-64.png"/>
+                                            </ImageView>
+                                        </graphic>
+                                    </Button>
+                                    <Button contentDisplay="TOP" fx:id="dialogButton" onAction="#onDialogClick">
+                                        <graphic>
+                                            <ImageView>
+                                                <Image url="@../../images/ribbon/dialog-64.png"/>
+                                            </ImageView>
+                                        </graphic>
+                                    </Button>
                                 </nodes>
                             </RibbonGroup>
                         </ribbonGroups>

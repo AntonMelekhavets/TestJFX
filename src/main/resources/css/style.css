@@ -65,3 +65,8 @@
 #serverIp {
     -fx-font-size: 14px;
 }
+
+.ribbon-group .button:pressed, .ribbon-group .button:default:hover:pressed {
+    -fx-background-color: derive(RIBBON_BUTTON_HIGHLIGHT_COLOR, 35%) !important;
+    -fx-text-fill: black !important;
+}
