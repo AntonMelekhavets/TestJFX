@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WindowsScreenCapturer implements ScreenCapturer {
+    private static User32 user32 = User32.INSTANCE;
     private WinDef.HWND hWnd;
     private int width;
     private int height;
@@ -40,26 +41,23 @@ public class WindowsScreenCapturer implements ScreenCapturer {
 
     public static List<String> getWindows() {
         List<String> list = new ArrayList<>();
-        long WS_ICONIC = 0x20000000L;
-        long WS_VISIBLE = 0x10000000L;
-        long WS_DISABLED = 0x08000000L;
         char[] windowText = new char[512];
         WinUser.WINDOWINFO windowInfo = new WinUser.WINDOWINFO();
-        User32.INSTANCE.EnumWindows((hWnd, arg1) -> {
-            User32.INSTANCE.GetWindowInfo(hWnd, windowInfo);
-            User32.INSTANCE.GetWindowText(hWnd, windowText, 512);
+        user32.EnumWindows((hWnd, arg1) -> {
+            user32.GetWindowInfo(hWnd, windowInfo);
+            user32.GetWindowText(hWnd, windowText, 512);
             String wText = Native.toString(windowText);
 
             if (wText.isEmpty()) {
                 return true;
             }
 
-            boolean isMinimized = (windowInfo.dwStyle & WS_ICONIC) == WS_ICONIC;
-            boolean isVisible = (windowInfo.dwStyle & WS_VISIBLE) == WS_VISIBLE;
-            if (!isMinimized && isVisible && windowInfo.cxWindowBorders != 0 && windowInfo.cyWindowBorders != 0) {
+            boolean isMinimized = (windowInfo.dwStyle & User32.WS_ICONIC) == User32.WS_ICONIC;
+            boolean isVisible = (windowInfo.dwStyle & User32.WS_VISIBLE) == User32.WS_VISIBLE;
+            if (windowInfo.dwStyle > 0 & !isMinimized && isVisible && windowInfo.cxWindowBorders != 0 && windowInfo.cyWindowBorders != 0) {
                 list.add(wText);
                 System.out.println("Found window with text " + hWnd + " Text: " + wText + " | Minimized: " + isMinimized + " | Visible: " + isVisible
-                        + " | Bottom: " + windowInfo.rcWindow.bottom + " | Left: " + windowInfo.rcWindow.left + " | Is Window: " + User32.INSTANCE.IsWindow(hWnd));
+                        + " | Bottom: " + windowInfo.rcWindow.bottom + " | Left: " + windowInfo.rcWindow.left + " | Window Style: " + windowInfo.dwStyle);
             }
             return true;
         }, null);
@@ -69,13 +67,13 @@ public class WindowsScreenCapturer implements ScreenCapturer {
     @Override
     public boolean start() {
         if (windowName.equals("desktop")) {
-            hWnd = User32.INSTANCE.GetDesktopWindow();
+            hWnd = user32.GetDesktopWindow();
         } else {
-            hWnd = User32.INSTANCE.FindWindow(null, windowName);
+            hWnd = user32.FindWindow(null, windowName);
         }
 
         WinDef.RECT rect = new WinDef.RECT();
-        User32.INSTANCE.GetWindowRect(hWnd, rect);
+        user32.GetWindowRect(hWnd, rect);
 
         int windowWidth = rect.right - rect.left;
         int windowHeight = rect.top - rect.bottom;

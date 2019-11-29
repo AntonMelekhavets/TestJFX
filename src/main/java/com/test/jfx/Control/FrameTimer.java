@@ -18,12 +18,12 @@ public class FrameTimer {
     public FrameTimer(ImageView imageView, String windowName) {
         this.imageView = imageView;
 
-        screenCapturer = new OpenCVScreenCapturer(windowName);
-        screenCapturer.setFrameRate(60);
+//        screenCapturer = new OpenCVScreenCapturer(windowName);
+//        screenCapturer.setFrameRate(60);
 
 //        screenCapturer = new RobotScreenCapturer();
 
-//        screenCapturer = new WindowsScreenCapturer(windowName);
+        screenCapturer = new WindowsScreenCapturer(windowName);
 
         service = Executors.newScheduledThreadPool(5);
     }
