@@ -1,6 +1,7 @@
 package com.test.jfx;
 
 import com.test.jfx.Controller.SimpleController;
+import com.test.jfx.Model.SceneEnum;
 import com.test.jfx.Model.User;
 import com.test.jfx.Utils.ResizeHelper;
 import javafx.application.Application;
@@ -13,6 +14,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.util.ResourceBundle;
 
 public class Main extends Application {
@@ -29,6 +31,21 @@ public class Main extends Application {
 
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
+        Scene scene = sceneFactory(SceneEnum.RIBBON);
+        primaryStage.setX(30);
+        primaryStage.setScene(scene);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
+        ResizeHelper.addResizeListener(primaryStage);
+
+        primaryStage.setOnCloseRequest(windowEvent -> {
+            System.out.println("Closing...");
+        });
+
+        System.out.println("Starting...");
+        primaryStage.show();
+    }
+
+    private Scene loadDefaultScene() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Simple.fxml"), ResourceBundle.getBundle(BUNDLE_NAME));
         Parent node = fxmlLoader.load();
         SimpleController simpleController = fxmlLoader.getController();
@@ -48,16 +65,26 @@ public class Main extends Application {
             else
                 System.out.println("Other");
         });
-        primaryStage.setX(30);
-        primaryStage.setScene(scene);
-        primaryStage.initStyle(StageStyle.UNDECORATED);
-        ResizeHelper.addResizeListener(primaryStage);
+        return scene;
+    }
 
-        primaryStage.setOnCloseRequest(windowEvent -> {
-            System.out.println("Closing...");
-        });
+    private Scene loadRibbonScene() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ribbon/SimpleRibbon.fxml"), ResourceBundle.getBundle(BUNDLE_NAME));
+        Parent node = fxmlLoader.load();
+        SimpleController simpleController = fxmlLoader.getController();
+        simpleController.initTable(new User());
+        Scene scene = new Scene(node);
+        return scene;
+    }
 
-        System.out.println("Starting...");
-        primaryStage.show();
+    private Scene sceneFactory(SceneEnum sceneEnum) throws IOException {
+        switch (sceneEnum) {
+            case RIBBON:
+                return loadRibbonScene();
+            case DEFAULT:
+                return loadDefaultScene();
+            default:
+                return loadDefaultScene();
+        }
     }
 }

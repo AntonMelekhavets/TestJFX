@@ -33,7 +33,7 @@ import java.util.regex.Pattern;
 
 public class DialogController {
     @FXML
-    private AnchorPane anchorPane;
+    private AnchorPane pane;
     @FXML
     private VBox vBox;
     @FXML
@@ -73,7 +73,7 @@ public class DialogController {
                 .concat(".").concat(fourthIpNum.textProperty()));
 
         Slider widthSlider = new Slider();
-        widthSlider.setMin(anchorPane.prefWidthProperty().subtract(20).doubleValue());
+        widthSlider.setMin(pane.prefWidthProperty().subtract(20).doubleValue());
         widthSlider.setMax(900.0);
         setMaxSize(widthSlider);
         configureSlider(widthSlider);
@@ -102,12 +102,12 @@ public class DialogController {
 
         heightSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             pieChart.setMinSize(pieChart.getMinWidth(), newValue.doubleValue());
-            anchorPane.getScene().getWindow().sizeToScene();
+            pane.getScene().getWindow().sizeToScene();
         });
 
         widthSlider.valueProperty().addListener(((observable, oldValue, newValue) -> {
             pieChart.setMinSize(newValue.doubleValue(), pieChart.getMinHeight());
-            anchorPane.getScene().getWindow().sizeToScene();
+            pane.getScene().getWindow().sizeToScene();
         }));
 
         RadioButton radioButton = new RadioButton();
@@ -166,7 +166,7 @@ public class DialogController {
 
     private void setMaxSize(Control node) {
         Insets vBoxInsets = vBox.getInsets();
-        double width = anchorPane.prefWidthProperty().subtract(vBoxInsets.getLeft() + vBoxInsets.getRight()).doubleValue();
+        double width = pane.prefWidthProperty().subtract(vBoxInsets.getLeft() + vBoxInsets.getRight()).doubleValue();
         node.setMaxWidth(width);
     }
 

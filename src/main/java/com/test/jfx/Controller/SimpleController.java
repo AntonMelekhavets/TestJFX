@@ -25,10 +25,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.*;
 import javafx.util.Callback;
 import javafx.util.Duration;
@@ -39,7 +36,7 @@ import java.util.*;
 
 public class SimpleController implements Initializable {
     @FXML
-    private AnchorPane anchorPane;
+    private Pane pane;
     @FXML
     private Button dialogButton;
     @FXML
@@ -58,7 +55,7 @@ public class SimpleController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        anchorPane.getChildren().add(loadFxml("/fxml/Header.fxml"));
+        pane.getChildren().add(loadFxml("/fxml/Header.fxml"));
         dialogButton.setText(resources.getString("dialogButton"));
         choiceButton.setText(resources.getString("choiceButton"));
         popupButton.setText(resources.getString("popupButton"));
@@ -168,7 +165,7 @@ public class SimpleController implements Initializable {
         mainBox.getChildren().addAll(loadHeader(), contentBox);
         popup.setAutoHide(true);
         popup.getContent().addAll(mainBox);
-        popup.show(anchorPane.getScene().getWindow());
+        popup.show(pane.getScene().getWindow());
 
         changer.start();
     }
@@ -180,7 +177,7 @@ public class SimpleController implements Initializable {
         dialog.setTitle("Capturing window?");
         dialog.setContentText("Choose the window to be captured:");
         dialog.initModality(Modality.WINDOW_MODAL);
-        dialog.initOwner(anchorPane.getScene().getWindow());
+        dialog.initOwner(pane.getScene().getWindow());
         dialog.initStyle(StageStyle.UNDECORATED);
         dialog.getDialogPane().setHeader(loadHeader());
         ResizeHelper.addResizeListener((Stage) dialog.getDialogPane().getScene().getWindow());
