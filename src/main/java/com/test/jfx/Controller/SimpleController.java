@@ -171,6 +171,10 @@ public class SimpleController implements Initializable {
         changer.start();
     }
 
+    public void onTestClick() {
+        //Feature test here
+    }
+
     public void onChoiceClick() {
         ChoiceDialog<String> dialog = new ChoiceDialog<>();
         dialog.getItems().addAll(getOptions());

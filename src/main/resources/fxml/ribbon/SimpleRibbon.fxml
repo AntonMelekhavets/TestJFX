@@ -6,8 +6,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <BorderPane fx:id="pane" maxHeight="-Infinity" minHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity"
             prefHeight="400.0" prefWidth="600.0" stylesheets="@../../css/style.css"
             xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
@@ -72,4 +71,11 @@
             </BorderPane.margin>
         </TableView>
     </center>
+    <bottom>
+        <Button fx:id="test" text="Test" onAction="#onTestClick">
+            <BorderPane.margin>
+                <Insets left="10" right="10" bottom="10"/>
+            </BorderPane.margin>
+        </Button>
+    </bottom>
 </BorderPane>
