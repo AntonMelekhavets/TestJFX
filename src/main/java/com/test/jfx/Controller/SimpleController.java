@@ -3,10 +3,12 @@ package com.test.jfx.Controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.test.jfx.Control.FrameTimer;
 import com.test.jfx.Main;
+import com.test.jfx.Model.CaptureEnum;
 import com.test.jfx.Model.User;
 import com.test.jfx.Utils.CustomCellFactory;
 import com.test.jfx.Utils.ProgressChanger;
 import com.test.jfx.Utils.ResizeHelper;
+import com.test.jfx.Utils.impl.LinuxScreenCapturer;
 import com.test.jfx.Utils.impl.WindowsScreenCapturer;
 import javafx.application.Platform;
 import javafx.beans.binding.DoubleBinding;
@@ -173,6 +175,10 @@ public class SimpleController implements Initializable {
 
     public void onTestClick() {
         //Feature test here
+        LinuxScreenCapturer linuxScreenCapturer = new LinuxScreenCapturer();
+        linuxScreenCapturer.start();
+        linuxScreenCapturer.getCapture();
+        linuxScreenCapturer.stop();
     }
 
     public void onChoiceClick() {
@@ -212,7 +218,7 @@ public class SimpleController implements Initializable {
         imageView.setFitHeight(300);
         imageView.setPreserveRatio(true);
 
-        FrameTimer frameTimer = new FrameTimer(imageView, selected);
+        FrameTimer frameTimer = new FrameTimer(imageView, selected, CaptureEnum.WINDOWS);
 
         Alert alert = new Alert(Alert.AlertType.NONE);
         alert.setResizable(true);
