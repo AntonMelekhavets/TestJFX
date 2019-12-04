@@ -81,8 +81,8 @@ public class SimpleController implements Initializable {
     public void initTable(User user) {
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        TableColumn<Map.Entry<String, String>, String> fieldColumn = new TableColumn("Field");
-        TableColumn<Map.Entry<String, String>, String> valueColumn = new TableColumn("Value");
+        TableColumn<Map.Entry<String, String>, String> fieldColumn = new TableColumn<>("Field");
+        TableColumn<Map.Entry<String, String>, String> valueColumn = new TableColumn<>("Value");
         fieldColumn.setCellValueFactory(map -> new ReadOnlyObjectWrapper<>(map.getValue().getKey()));
         valueColumn.setCellValueFactory(map -> new ReadOnlyObjectWrapper<>(map.getValue().getValue()));
         tableView.getColumns().addAll(fieldColumn, valueColumn);
@@ -92,8 +92,8 @@ public class SimpleController implements Initializable {
         fieldColumn.setCellFactory(cellFactory);
         valueColumn.setCellFactory(cellFactory);
 
-        Map<String, String> userMap = objectMapper.convertValue(user, Map.class);
-        ObservableList<Map.Entry<String, String>> tableItems = FXCollections.observableArrayList(userMap.entrySet());
+        Map userMap = objectMapper.convertValue(user, Map.class);
+        ObservableList tableItems = FXCollections.observableArrayList(userMap.entrySet());
         tableView.setItems(tableItems);
     }
 
@@ -133,8 +133,7 @@ public class SimpleController implements Initializable {
     }
 
     private List<String> getOptions() {
-        List<String> options = WindowsScreenCapturer.getWindows();
-        return options;
+        return WindowsScreenCapturer.getWindows();
     }
 
     public void onPopupClick() {
@@ -148,7 +147,7 @@ public class SimpleController implements Initializable {
         Label popupLabel = new Label("PopupContent");
         popupLabel.setId("popupLabel");
 
-        Spinner<Integer> spinner = new Spinner();
+        Spinner spinner = new Spinner();
         SpinnerValueFactory.IntegerSpinnerValueFactory valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(2, 24, 4);
         valueFactory.setAmountToStepBy(2);
         spinner.setValueFactory(valueFactory);

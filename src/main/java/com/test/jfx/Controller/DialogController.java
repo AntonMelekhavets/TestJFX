@@ -127,7 +127,7 @@ public class DialogController {
         group.getChildren().addAll(createButtons(10));
         group.getChildren().add(radioButton);
         Platform.runLater(heightSlider::requestFocus);
-        optionalElements = new ArrayList(Arrays.asList(widthSlider, heightSlider, pieChart, group));
+        optionalElements = new ArrayList<>(Arrays.asList(widthSlider, heightSlider, pieChart, group));
         onSwitchClick();
     }
 
@@ -156,7 +156,7 @@ public class DialogController {
     }
 
     public void onSwitchClick() {
-        optionalElements.stream().forEach(o -> o.setVisible(!o.isVisible()));
+        optionalElements.forEach(o -> o.setVisible(!o.isVisible()));
         if (switchButton.getText().equals("Show")) {
             switchButton.setText("Hide");
         } else {
